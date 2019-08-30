@@ -45,7 +45,7 @@ const Info=(props)=>{
                 <img src={infoAboutBurger.img} alt={infoAboutBurger.name}/>
                 {infoAboutBurger.ingredients ? 
                     infoAboutBurger.ingredients.map(item=>
-                    <Ingredient  key={ now.getTime() +Math.floor(Math.random() * 1000) + -1000} changeQuantity={changeQuantity} name={item.name} quantity={item.quantity}/>
+                    <Ingredient  key={(now.getTime() + Math.random() * 1000) + -1000} changeQuantity={changeQuantity} name={item.name} quantity={item.quantity}/>
                     )
                 :<div></div>}
             </div>
