@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState,useEffect } from 'react';
+import Info from './Components/BurgerInfo/index'
 
-
-function Info(props){
+function BurgerInfo(props){
+    const [name,setName]=useState('');
+    const type=props.match.url.split('/');
     useEffect(() => {
-        let type=props.match.url.split('/');
-        console.log(type);
-        
-    });
+        setName(type);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
     return (
-        <div>
-           
+        <div className='infoAboutBurger'>
+            <Info name={name[2]}/>
         </div>
     );
   }
 
-export default Info;
+export default BurgerInfo;

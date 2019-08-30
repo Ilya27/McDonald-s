@@ -1,18 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import List from './Components/List/index'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import {getProductList} from '../../store/action/getProduct';
 
-function Menu(){
-    const [data, setData] = useState(null);
+const  Menu=(props)=>{
+    const { getProductList,burgers } = props
     useEffect(() => {
-        fetch('https://my-json-server.typicode.com/Ilya27/demo-server/db')
-        .then(data=>data.json())
-        .then(data=>{setData(data);console.log(data)})
+        getProductList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     return (
         <div>
-            {data != null ? <div><List data={data} /></div>:<div>Hi</div>}
+            {burgers ? 
+            <div>
+                <List burgers={burgers}/>
+            </div>:
+            <p>Loading</p>
+            }
         </div>
     );
   }
 
-export default Menu;
+  
+const mapStateToProps = (state) => ({
+    burgers:state.product.burgers,
+})
+const mapDispatchToProps = {
+    getProductList,
+};
+   
+  
+  
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Menu))
